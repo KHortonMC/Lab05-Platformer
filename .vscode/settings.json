@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Lab00-Blank-Unity-Project.slnx"
+    "dotnet.defaultSolution": "Lab05-Platformer.slnx"
 }
