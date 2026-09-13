@@ -1,8 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class OpenChest : MonoBehaviour
 {
-    Animator animator;
-    void Start() { animator = GetComponentInParent<Animator>(); }
-    void OnTriggerEnter(Collider other) { animator.SetTrigger("OpenChest"); }
+    [SerializeField] Animator chest;
+    [SerializeField] Animator coins1;
+    [SerializeField] Animator coins2;
+    void OnTriggerEnter(Collider other) { 
+        chest.SetTrigger("OpenChest"); 
+        coins1.SetTrigger("SpillCoins");
+        coins2.SetTrigger("SpillCoins");
+    }
 }

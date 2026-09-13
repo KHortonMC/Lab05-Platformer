@@ -1,9 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SimpleCharacterController : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public float jumpSpeed = 20f;
+    public bool canJump = true;
     private Rigidbody rb;
     private Animator animator;
     private Vector2 moveInput;
@@ -29,14 +32,20 @@ public class SimpleCharacterController : MonoBehaviour
         );
 
         if (movement != Vector3.zero) { 
-            rb.MoveRotation(Quaternion.LookRotation(movement)); 
+            // look where we're going
+            rb.MoveRotation(Quaternion.LookRotation(movement));
+            
+            // move to a new position
+            float moveDistance = moveSpeed * Time.fixedDeltaTime;
+            Vector3 scaledMove = movement * moveDistance;
+            rb.MovePosition(rb.position + scaledMove);
+            
+            // set the animation flag
+            animator.SetBool("Walk", true);
         }
-
-        animator.SetBool("Walk", movement != Vector3.zero);
-
-        // Move the Rigidbody
-        rb.MovePosition(
-            rb.position + moveSpeed * Time.fixedDeltaTime * movement
-        );
+        else
+        {
+            animator.SetBool("Walk", false);
+        }
     }
 }
